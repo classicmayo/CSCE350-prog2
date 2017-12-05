@@ -35,10 +35,11 @@ Block::Block(string str)
   nonce = str.substr(257);
 }
 
-Block::Block(vector<Block> &, string merkle)
+Block::Block(vector<Block> &blocks, string merkle)
 {
-  // use prev block from Block[] to get hash of prev block
-  prevHash = "";
+  // use prev block from Block vector to get hash of prev block
+  Block prevBlock = blocks.at(0);
+  prevHash = picosha2::hash256_hex_string(utils::hexToString(prevBlock.toString()));
   merkleRoot = merkle;
   nonce = mine(prevHash, merkleRoot);
 }
@@ -65,7 +66,7 @@ Block::~Block(); //destructor
 bool Block::isValid()
 {
   // string hash = hash(this.toString());
-  string hash = "0"
+  string hash = picosha2::hash256_hex_string(utils::hexToString(this.toString()));
   if(hash[0] == '0')
     return true;
   return false;
@@ -73,7 +74,7 @@ bool Block::isValid()
 
 string Block::toString()
 {
-  return prevHash + " " + merkleRoot + " " + nonce;
+  return prevHash + merkleRoot + nonce;
 }
 
 string Block::getNonce()
@@ -83,7 +84,12 @@ string Block::getNonce()
   {
     Block temp = new Block(this.getPrevHash(), this.getMerkleRoot(), std::to_string(i)); 
     if(temp.isValid())
-        return to_string(i); //TODO: tostring needs to convert number to hex
+    {
+      // convert i to hex string and return
+      std::stringstream stream;
+      stream << std::hex << to_string(i);
+      return stream.str(); 
+    }
   }
   std::cout << "No nonce found." << endl;
   return "";
