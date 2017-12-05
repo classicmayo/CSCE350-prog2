@@ -33,6 +33,7 @@ class Block
     bool isValid();
     std::string toString();
     std::string mine() const;
+    std::string calcHash();
     std::string getPrevHash() const;
     std::string getMerkleRoot() const;
     std::string getNonce() const;

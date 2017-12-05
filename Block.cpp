@@ -94,6 +94,12 @@ std::string Block::mine() const
   return "";
 }
 
+std::string Block::calcHash()
+{
+  std::string hash = picosha2::hash256_hex_string(utils::hexToString(this->toString()));
+  return hash;
+}
+
 std::string Block::getPrevHash() const
 {
   return prevHash;
