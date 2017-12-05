@@ -19,18 +19,19 @@ ASCII file which contains headers of all the blocks in the blockchain. Example (
 000000000000000000ad6e90c0790e83760a9d13728c23474352a2c8c7a6e0eb 2b12fcf1b09288fcaff797d71e950e71ae42b91e8bdb2304758dfcffc2b620e3 0000000f
 ```
 
-Each line represents a block. The latest block is on the first line, followed by the block before it, etc. Each header has three fields, separated by spaces, and represented in hexadecimal:
-| Field | Size | Description |
-| ----- | ---- | ----------- |
-| Previous Block Hash | 32 B | References the hash of the previous (parent) block in the chain |
-| Merkle Root | 32 B | Hash of the root of the Merkle tree of this block's transactions |
-| Nonce | 4 B | Counter for the proof-of-work algorithm | 
+Each line represents a block. The latest block is on the first line, followed by the block before it, etc. Each header has three fields, separated by spaces, and represented in hexadecimal:  
+ Field | Size | Description 
+ ----- | ---- | ----------- 
+ Previous Block Hash | 32 B | References the hash of the previous (parent) block in the chain 
+ Merkle Root | 32 B | Hash of the root of the Merkle tree of this block's transactions 
+ Nonce | 4 B | Counter for the proof-of-work algorithm 
 
 #### Block Hash
 The hash of a particular block is obtained by concatenating its three fields and taking the SHA-256 hash. 
 
 #### Merkle Root
 The transactions in the transaction file are given in order. The hash of a transaction can be obtained by taking the SHA-256 hash of the corresponding line of the text file.  
+  
 A Merkle tree is constructed as follows:  
 
 To illustrate the concept, let us label the transactions in the transaction file in order as A, B, C, ... Take the example file `transactions_1.txt`:  
@@ -45,24 +46,30 @@ F - Bob John 7.9
 G - Tom Todd 4.5
 H - Todd Bob 12.0
 ```
-Now we compute the hash of each transaction. Next, concatenate the hashes of adjacent transactions and take the hash of this new string:
+
+Now we compute the hash of each transaction. Next, concatenate the hashes of adjacent transactions and take the hash of this new string:  
+
 ```
 H_AB = hash(hash(A)+hash(B))
 H_CD = hash(hash(C)+hash(D))
 H_EF = hash(hash(E)+hash(F))
 H_GH = hash(hash(G)+hash(H))
 ```
-Concatenate adjacent hashes once again and take the hash of these strings:
+
+Concatenate adjacent hashes once again and take the hash of these strings:  
+
 ```
 H_ABCD = hash(H_AB + H_CD)
 H_EFGH = hash(H_EF + H_GH)
 ```
 
 This process continues until only one string remains, which is called the Merkle root:
+
 ```
 H_ABCDEFGH = hash(H_ABCD + H_EFGH) 
 ``` 
-As you can see, the subsequent hashing creates a binary tree known as the Merkle tree:
+
+As you can see, the subsequent hashing creates a binary tree known as the Merkle tree:  
 ```
           H_ABCDEFGH
           /        \
@@ -83,7 +90,9 @@ Bill Alice 1.3
 John Bill 2.7
 Bob John 7.9
 Tom Todd 4.5
-Todd Bob 12.0 ``` Each line represents a transaction, with the first field being the sender, the second the recipient, and the third representing the amount transferred.
+Todd Bob 12.0 
+``` 
+Each line represents a transaction, with the first field being the sender, the second the recipient, and the third representing the amount transferred.
 
 ## Overview of the Code
 
