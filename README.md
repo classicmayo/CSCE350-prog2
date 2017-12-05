@@ -98,11 +98,11 @@ Each line represents a transaction, with the first field being the sender, the s
 ## Overview of the Code
 
 1. First, the code checks that the given chain is valid (that is, every block in it is valid, and the chain is not broken).  
-- A block is valid if its hash begins with four 0 bits (i.e., one 0 in hex).  
-- A chain is unbroken if each block correctly points to the next block in the chain.
+  - A block is valid if its hash begins with four 0 bits (i.e., one 0 in hex).  
+  - A chain is unbroken if each block correctly points to the next block in the chain.
 2. If the chain is invalid, we print the root of the Merkle tree corresponding to the transactions in the second input file (the transaction file).
-- The Merkle root of the above example transaction file is `91fc3bf900a0558a6ead455c2f2c440302d0c33d17c408dd3ce384620d452c70`
+  - The Merkle root of the above example transaction file is `91fc3bf900a0558a6ead455c2f2c440302d0c33d17c408dd3ce384620d452c70`
 3. If the chain is valid, we print out the fields of a new block to point to the latest block in the chain
-- The block has the root of the Merkle tree created using the transaction file
-- The nonce is mined to create a valid block (i.e., brute force all possible 4-byte combinations to create a block which has a hash beginning in four 0 bits)
-- In this example case, the new block is `09ebbf28bacb7910d24dc1ea7a3a3480611a263e7c8163276a1a14f812d43ffd 91fc3bf900a0558a6ead455c2f2c440302d0c33d17c408dd3ce384620d452c70 0000000d`. Its hash is `03b93c10887c7f015dd9524d39f3d763a2f43872f7555724b552de94132e0f25` (note that it begins in a 0 hex character; thus it is valid).
+  - The block has the root of the Merkle tree created using the transaction file
+  - The nonce is mined to create a valid block (i.e., brute force all possible 4-byte combinations to create a block which has a hash beginning in four 0 bits)
+  - In this example case, the new block is `09ebbf28bacb7910d24dc1ea7a3a3480611a263e7c8163276a1a14f812d43ffd 91fc3bf900a0558a6ead455c2f2c440302d0c33d17c408dd3ce384620d452c70 0000000d`. Its hash is `03b93c10887c7f015dd9524d39f3d763a2f43872f7555724b552de94132e0f25` (note that it begins in a 0 hex character; thus it is valid).
