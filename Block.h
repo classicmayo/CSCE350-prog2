@@ -13,6 +13,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Block
 {
@@ -24,7 +25,7 @@ class Block
   public:
     Block();
     Block(string str);
-    Block(Block[]&, string);
+    Block(vector<Block>&, string);
     Block(string, string, string);
     Block(const Block &); //copy constructor
     virtual ~Block(); //destructor

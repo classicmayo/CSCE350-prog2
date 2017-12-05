@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 #include <math.h>
 
 private string prevHash;
@@ -34,7 +35,7 @@ Block::Block(string str)
   nonce = str.substr(257);
 }
 
-Block::Block(Block[] &, string merkle)
+Block::Block(vector<Block> &, string merkle)
 {
   // use prev block from Block[] to get hash of prev block
   prevHash = "";
