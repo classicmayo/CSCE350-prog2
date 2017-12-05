@@ -35,10 +35,9 @@ Block::Block(std::string str)
   nonce = str.substr(257);
 }
 
-Block::Block(std::vector<Block> &blocks, std::string merkle)
+// create new block from previous block
+Block::Block(const Block &prevBlock, std::string merkle)
 {
-  // use prev block from Block vector to get hash of prev block
-  Block prevBlock = blocks.at(0);
   prevHash = picosha2::hash256_hex_string(utils::hexToString(prevBlock.toString()));
   merkleRoot = merkle;
   nonce = mine();

@@ -25,7 +25,7 @@ class Block
   public:
     Block();
     Block(std::string str);
-    Block(std::vector<Block>&, std::string);
+    Block(const Block &, std::string);
     Block(std::string, std::string, std::string);
     Block(const Block &); //copy constructor
     virtual ~Block(); //destructor
