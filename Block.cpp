@@ -14,9 +14,9 @@
 #include <vector>
 #include <math.h>
 
-private string prevHash;
-private string merkleRoot;
-private string nonce;
+#include "Block.h"
+#include "picosha2.h"
+#include "utils.h"
 
 /**** constructors ****/
 Block::Block()
@@ -26,7 +26,7 @@ Block::Block()
   nonce = "";
 }
 
-Block::Block(string str)
+Block::Block(std::string str)
 {
   // assumes str has 266 characters
   // (64B + space + 64B + space + 4B = 128 + 1 + 128 + 1 + 8 char = 166 char)
@@ -35,77 +35,76 @@ Block::Block(string str)
   nonce = str.substr(257);
 }
 
-Block::Block(vector<Block> &blocks, string merkle)
+Block::Block(std::vector<Block> &blocks, std::string merkle)
 {
   // use prev block from Block vector to get hash of prev block
   Block prevBlock = blocks.at(0);
   prevHash = picosha2::hash256_hex_string(utils::hexToString(prevBlock.toString()));
   merkleRoot = merkle;
-  nonce = mine(prevHash, merkleRoot);
+  nonce = mine();
 }
 
-Block::Block(string hash, string merkle, string n)
+Block::Block(std::string hash, std::string merkle, std::string n)
 {
   prevHash = hash;
   merkleRoot = merkle;
   nonce = n;
 }
 
-Block::Block(const Block &b); //copy constructor
+Block::Block(const Block &b) //copy constructor
 {
   prevHash = b.getPrevHash();
   merkleRoot = b.getMerkleRoot();
-  nonce = b.getNonce();
+  nonce = b.mine();
 }
 
-Block::~Block(); //destructor
+Block::~Block() //destructor
 {
 }
 
 /**** public methods ****/
 bool Block::isValid()
 {
-  // string hash = hash(this.toString());
-  string hash = picosha2::hash256_hex_string(utils::hexToString(this.toString()));
+  std::string hash = picosha2::hash256_hex_string(utils::hexToString(this->toString()));
   if(hash[0] == '0')
     return true;
   return false;
 }
 
-string Block::toString()
+std::string Block::toString()
 {
   return prevHash + merkleRoot + nonce;
 }
 
-string Block::getNonce()
+std::string Block::mine() const
 {
   // brute force nonces so hash begins with zero/block is valid
   for(int i = 0; i < pow(2, 8); i++)
   {
-    Block temp = new Block(this.getPrevHash(), this.getMerkleRoot(), std::to_string(i)); 
+    Block temp(this->getPrevHash(), this->getMerkleRoot(), std::to_string(i)); 
     if(temp.isValid())
     {
       // convert i to hex string and return
       std::stringstream stream;
-      stream << std::hex << to_string(i);
+      stream << std::hex << std::to_string(i);
       return stream.str(); 
     }
   }
-  std::cout << "No nonce found." << endl;
+  std::cout << "No nonce found." << std::endl;
   return "";
 }
 
-string Block::getPrevHash()
+std::string Block::getPrevHash() const
 {
   return prevHash;
 }
 
-string Block::getMerkleRoot()
+std::string Block::getMerkleRoot() const
 {
   return merkleRoot;
 }
 
-string Block::getNonce()
+std::string Block::getNonce() const
 {
   return nonce;
 }

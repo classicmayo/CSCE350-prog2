@@ -18,24 +18,24 @@
 class Block
 {
   private:
-    string prevHash;
-    string merkleRoot;
-    string nonce;
+    std::string prevHash;
+    std::string merkleRoot;
+    std::string nonce;
 
   public:
     Block();
-    Block(string str);
-    Block(vector<Block>&, string);
-    Block(string, string, string);
+    Block(std::string str);
+    Block(std::vector<Block>&, std::string);
+    Block(std::string, std::string, std::string);
     Block(const Block &); //copy constructor
     virtual ~Block(); //destructor
 
     bool isValid();
-    string toString();
-    string mine(string, string);
-    string getPrevHash();
-    string getMerkleRoot();
-    string getNonce();
-}
+    std::string toString();
+    std::string mine() const;
+    std::string getPrevHash() const;
+    std::string getMerkleRoot() const;
+    std::string getNonce() const;
+};
 
 #endif
