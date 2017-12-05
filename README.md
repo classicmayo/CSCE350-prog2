@@ -99,6 +99,7 @@ Each line represents a transaction, with the first field being the sender, the s
 
 1. First, the code checks that the given chain is valid (that is, every block in it is valid, and the chain is not broken).  
   - A block is valid if its hash begins with four 0 bits (i.e., one 0 in hex).  
+    - The hash of a block is defined as the SHA256 hash of the concatenation of its fields (i.e. PreviousHash + MerkleRoot + Nonce, with no spaces)
   - A chain is unbroken if each block correctly points to the next block in the chain.
 2. If the chain is invalid, we print the root of the Merkle tree corresponding to the transactions in the second input file (the transaction file).
   - The Merkle root of the above example transaction file is `91fc3bf900a0558a6ead455c2f2c440302d0c33d17c408dd3ce384620d452c70`
