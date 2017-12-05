@@ -20,11 +20,11 @@ ASCII file which contains headers of all the blocks in the blockchain. Example (
 ```
 
 Each line represents a block. The latest block is on the first line, followed by the block before it, etc. Each header has three fields, separated by spaces, and represented in hexadecimal:  
- Field | Size | Description   
- ----- | ---- | -----------   
- Previous Block Hash | 32 B | References the hash of the previous (parent) block in the chain   
- Merkle Root | 32 B | Hash of the root of the Merkle tree of this block's transactions   
- Nonce | 4 B | Counter for the proof-of-work algorithm   
+| Field               | Size | Description                                                      |
+| -----               | ---- | -----------                                                      |  
+| Previous Block Hash | 32 B | References the hash of the previous (parent) block in the chain  |
+| Merkle Root         | 32 B | Hash of the root of the Merkle tree of this block's transactions |
+| Nonce               | 4 B  | Counter for the proof-of-work algorithm                          | 
 
 #### Block Hash
 The hash of a particular block is obtained by concatenating its three fields and taking the SHA-256 hash. 
