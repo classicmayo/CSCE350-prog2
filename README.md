@@ -20,6 +20,7 @@ ASCII file which contains headers of all the blocks in the blockchain. Example (
 ```
 
 Each line represents a block. The latest block is on the first line, followed by the block before it, etc. Each header has three fields, separated by spaces, and represented in hexadecimal:  
+
 | Field               | Size | Description                                                      |
 | -----               | ---- | -----------                                                      |  
 | Previous Block Hash | 32 B | References the hash of the previous (parent) block in the chain  |
