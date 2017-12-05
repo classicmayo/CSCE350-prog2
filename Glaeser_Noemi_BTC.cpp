@@ -13,13 +13,19 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Block.h"
-#include "TransactionList.h"
+#include "Transaction.h"
 #include "picosha2.h"
 
 int main(int argc, char ** argv)
 {
+  int numblocks = 0;
+  int numtransactions = 0;
+  vector<Block> blocks;
+  vector<Transaction> transactions;
+
   if(argc != 3)
   {
     std::cout << "Usage: Glaeser_Noemi_BTC [blockchain.txt] [transaction.txt]" << endl;
@@ -42,30 +48,18 @@ int main(int argc, char ** argv)
     exit(1);
   }
 
-  int numblocks = 0;
-  int numtransactions = 0;
-  std::string line;
-
   /*** Read in blockchain ***/
-  // count number of blocks  
+  std::string line;
   while(std::getline(blockchainFile, line))
-    ++numblocks;
-
-  Block blocks[numblocks];
-
-  // reset filestream
-  std::ifstream blockchainFile(blockchainFileName);
-
-  // populate array of blocks from file
-  int i = 0;
-  while(std::getline(blockchainFile, line)
   {
-    blocks[i] = new Block(line);
-    i++;
+    blocks.push_back(new Block(line));
   }
 
   /*** Read in Transactions ***/
-  TransactionList transactions(transactionFile);
+  while(std::getline(transactionFile, line))
+  {
+    transactions.push_back(new Transaction(line));
+  }
 
   /*** Generate Merkle Root ***/
   std::string merkle = merkleRoot(transactions);
