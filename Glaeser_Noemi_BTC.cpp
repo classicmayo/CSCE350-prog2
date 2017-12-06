@@ -17,34 +17,34 @@
 
 #include "Block.h"
 #include "Transaction.h"
-#include "picosha2.h"
+#include "Blockchain.h"
 
 int main(int argc, char ** argv)
 {
   int numblocks = 0;
   int numtransactions = 0;
-  vector<Block> blocks;
-  vector<Transaction> transactions;
+  std::vector<Block> blocks;
+  std::vector<Transaction> transactions;
 
   if(argc != 3)
   {
-    std::cout << "Usage: Glaeser_Noemi_BTC [blockchain.txt] [transaction.txt]" << endl;
+    std::cout << "Usage: Glaeser_Noemi_BTC [blockchain.txt] [transaction.txt]" << std::endl;
     exit(1);
   }
 
-  string blockchainFileName = std::to_string(argv[1]);
-  string transactionFileName = std::to_string(argv[2]);
+  std::string blockchainFileName = argv[1];
+  std::string transactionFileName = argv[2];
 
   std::ifstream blockchainFile(blockchainFileName);
   std::ifstream transactionFile(transactionFileName);
   if(!blockchainFile)
   {
-    std::cout << "Cannot open " << blockchainFileName << endl;
+    std::cout << "Cannot open " << blockchainFileName << std::endl;
     exit(1);
   }
   if(!transactionFile)
   {
-    std::cout << "Cannot open " << transactionFileName << endl;
+    std::cout << "Cannot open " << transactionFileName << std::endl;
     exit(1);
   }
 
@@ -52,17 +52,19 @@ int main(int argc, char ** argv)
   std::string line;
   while(std::getline(blockchainFile, line))
   {
-    blocks.push_back(new Block(line));
+    Block newBlock(line);
+    blocks.push_back(newBlock);
   }
 
   /*** Read in Transactions ***/
   while(std::getline(transactionFile, line))
   {
-    transactions.push_back(new Transaction(line));
+    Transaction newTransaction(line);
+    transactions.push_back(newTransaction);
   }
 
   /*** Generate Merkle Root ***/
-  std::string merkle = merkleRoot(transactions);
+  std::string merkle = merkleRoot(&transactions);
 
   /*** Check if chain is valid ***/
   
@@ -71,22 +73,26 @@ int main(int argc, char ** argv)
   {
     if(!b.isValid())
     { 
-      std::cout << merkle << endl;
+      std::cout << merkle << std::endl;
       exit(0);
     }
   }
   
   // check if chain is unbroken
   Blockchain bchain(blocks);
-  if(!chain.isValid())
+  if(!bchain.isValid())
   {
-    std::cout << merkle << endl;
+    std::cout << merkle << std::endl;
     exit(0);
   }
   
   /*** We have now established that the chain is valid ***/
   Block newBlock(blocks, merkle);
-  std::cout << newBlock << endl;
+  std::cout << newBlock.toString() << std::endl;
   exit(0);
 
+}
+
+std::string merkleRoot(std::vector<Transaction> & tr)
+{
 }
