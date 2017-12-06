@@ -94,6 +94,7 @@ std::string Block::mine() const
   return "";
 }
 
+// calculate this block's hash
 std::string Block::calcHash()
 {
   std::string hash = picosha2::hash256_hex_string(utils::hexToString(this->toString()));
