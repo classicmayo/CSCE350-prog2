@@ -18,6 +18,11 @@
 #include "Block.h"
 #include "Transaction.h"
 #include "Blockchain.h"
+#include "./utils.h"
+#include "picosha2.h"
+
+// function prototype
+std::string merkleRoot(std::vector<Transaction> &);
 
 int main(int argc, char ** argv)
 {
@@ -64,7 +69,7 @@ int main(int argc, char ** argv)
   }
 
   /*** Generate Merkle Root ***/
-  std::string merkle = merkleRoot(&transactions);
+  std::string merkle(merkleRoot(transactions));
 
   /*** Check if chain is valid ***/
   
@@ -93,6 +98,24 @@ int main(int argc, char ** argv)
 
 }
 
+// recursive function
 std::string merkleRoot(std::vector<Transaction> & tr)
 {
+  int size = tr.size();
+
+  if(size == 1)
+  {
+    return picosha2::hash256_hex_string(utils::hexToString(tr.at(0).toString()));
+  }
+  else
+  {
+    // create subvector (this constructor is inclusive)
+    std::vector<Transaction> firstHalf(tr.begin(), tr.end() - size/2);
+    std::vector<Transaction> secondHalf(tr.begin() + size/2, tr.end());
+
+    std::string leftHash(merkleRoot(firstHalf));
+    std::string rightHash(merkleRoot(secondHalf));
+
+    return picosha2::hash256_hex_string(utils::hexToString(leftHash+rightHash));
+  }
 }
