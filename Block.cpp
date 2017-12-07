@@ -66,7 +66,7 @@ Block::Block(const Block &b) //copy constructor
 {
   prevHash = b.getPrevHash();
   merkleRoot = b.getMerkleRoot();
-  nonce = b.mine();
+  nonce = b.getNonce();
 }
 
 Block::~Block() //destructor
@@ -76,7 +76,7 @@ Block::~Block() //destructor
 /**** public methods ****/
 bool Block::isValid()
 {
-  std::string hash = picosha2::hash256_hex_string(utils::hexToString(this->toString()));
+  std::string hash(picosha2::hash256_hex_string(utils::hexToString(this->toString())));
   if(hash[0] == '0')
     return true;
   return false;

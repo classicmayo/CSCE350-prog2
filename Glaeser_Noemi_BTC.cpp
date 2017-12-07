@@ -71,9 +71,12 @@ int main(int argc, char ** argv)
   /*** Check if chain is valid ***/
   
   // check if each block is valid
-  for(Block b : blocks)
+  for(int i = 0; i < blocks.size(); i++)
   {
-    if(!b.isValid())
+    Block currBlock(blocks.at(i));
+    std::cout << currBlock.toString() << std::endl;
+    std::cout << "isValid: " << currBlock.isValid() << std::endl;
+    if(!(currBlock.isValid()))
     { 
       std::cout << merkle << std::endl;
       exit(0);
@@ -102,7 +105,7 @@ std::string merkleRoot(std::vector<Transaction> & tr)
 
   if(size == 1)
   {
-    return picosha2::hash256_hex_string(utils::hexToString(tr.at(0).toString()));
+    return picosha2::hash256_hex_string(tr.at(0).toString());
   }
   else
   {
@@ -113,6 +116,6 @@ std::string merkleRoot(std::vector<Transaction> & tr)
     std::string leftHash(merkleRoot(firstHalf));
     std::string rightHash(merkleRoot(secondHalf));
 
-    return picosha2::hash256_hex_string(utils::hexToString(leftHash+rightHash));
+    return picosha2::hash256_hex_string(leftHash+rightHash);
   }
 }
