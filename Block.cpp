@@ -19,11 +19,31 @@ Block::Block()
 
 Block::Block(std::string str)
 {
-  // assumes str has 266 characters
-  // (64B + space + 64B + space + 4B = 128 + 1 + 128 + 1 + 8 char = 166 char)
-  prevHash = str.substr(0, 128);
-  merkleRoot = str.substr(129, 128);
-  nonce = str.substr(257);
+  std::vector<std::string> strings;
+  std::string word;
+
+  int pos = str.find(" ");
+  while(pos != std::string::npos)
+  {
+    word = str.substr(0, pos);
+    strings.push_back(word);
+
+    pos = str.find(" ");
+    str = str.substr(pos+1);
+  }
+  
+  if(strings.size() != 3)
+  {
+    prevHash = "";
+    merkleRoot = "";
+    nonce = "";
+  }
+  else
+  {
+    prevHash = strings.at(0);
+    merkleRoot = strings.at(1);
+    nonce = strings.at(1);
+  }
 }
 
 Block::Block(std::vector<Block> &blocks, std::string merkle)
