@@ -3,3 +3,4 @@ test*
 *.gch
 *.swp
 *.pdf
+*.out

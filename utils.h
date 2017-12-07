@@ -6,15 +6,15 @@
  * Output: 
  * Date: 4-Dec-2017
  ***************************************************************************/
-#ifndef UTILS
-#define UTILS
+#ifndef GLAESER_UTILS_H
+#define GLAESER_UTILS_H
 
 #include "picosha2.h"
 #include "glaeser_common.h"
 
 namespace utils
 {
-    int hexCharToInt(char a){
+    inline int hexCharToInt(char a){
         if(a>='0' && a<='9')
             return(a-48);
         else if(a>='A' && a<='Z')
@@ -23,7 +23,7 @@ namespace utils
             return(a-87);
     }
 
-    std::string hexToString(std::string str){
+    inline std::string hexToString(std::string str){
         std::stringstream HexString;
         for(int i=0;i<str.length();i++){
             char a = str.at(i++);
