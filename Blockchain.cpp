@@ -8,12 +8,6 @@
  * Last Modified: 4-Dec-2017
  ***************************************************************************/
 
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-
 #include "Blockchain.h"
 
 /*** constructors ***/

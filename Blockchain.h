@@ -10,13 +10,8 @@
 #ifndef BLOCKCHAIN_H
 #define BLOCKCHAIN_H
 
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-
 #include "Block.h"
+#include "glaeser_common.h"
 
 class Blockchain
 {

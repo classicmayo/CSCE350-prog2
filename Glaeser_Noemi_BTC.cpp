@@ -9,17 +9,7 @@
  * Date: 3-Dec-2017
  ***************************************************************************/
 
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-
-#include "Block.h"
-#include "Transaction.h"
-#include "Blockchain.h"
-#include "./utils.h"
-#include "picosha2.h"
+#include "Glaeser_Noemi_BTC.h"
 
 // function prototype
 std::string merkleRoot(std::vector<Transaction> &);

@@ -7,11 +7,6 @@
  * Created: 4-Dec-2017
  * Last Modified: 4-Dec-2017
  ***************************************************************************/
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
 
 #include "Transaction.h"
 

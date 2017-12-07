@@ -10,11 +10,7 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
+#include "glaeser_common.h"
 
 class Transaction 
 {

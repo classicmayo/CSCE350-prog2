@@ -7,16 +7,7 @@
  * Date: 3-Dec-2017
  ***************************************************************************/
 
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <math.h>
-
 #include "Block.h"
-#include "picosha2.h"
-#include "utils.h"
 
 /**** constructors ****/
 Block::Block()
