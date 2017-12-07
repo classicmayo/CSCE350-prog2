@@ -16,7 +16,7 @@
 
 #include "Block.h"
 #include "picosha2.h"
-#include "utils.h"
+#include "./utils.h"
 
 /**** constructors ****/
 Block::Block()
