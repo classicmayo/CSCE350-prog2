@@ -18,6 +18,7 @@ int main(int argc, char ** argv)
 {
   int numblocks = 0;
   int numtransactions = 0;
+  Block temp;
   std::vector<Block> blocks;
   std::vector<Transaction> transactions;
 
@@ -29,6 +30,9 @@ int main(int argc, char ** argv)
 
   std::string blockchainFileName = argv[1];
   std::string transactionFileName = argv[2];
+
+  std::cout << "blockchainFileName: " << blockchainFileName << std::endl;
+  std::cout << "transactionFileName: " << transactionFileName << std::endl;
 
   std::ifstream blockchainFile(blockchainFileName);
   std::ifstream transactionFile(transactionFileName);
@@ -45,8 +49,10 @@ int main(int argc, char ** argv)
 
   /*** Read in blockchain ***/
   std::string line;
+  int count = 0;
   while(std::getline(blockchainFile, line))
   {
+    std::vector<Block> temp;
     Block newBlock(line);
     blocks.push_back(newBlock);
   }
@@ -60,6 +66,7 @@ int main(int argc, char ** argv)
 
   /*** Generate Merkle Root ***/
   std::string merkle(merkleRoot(transactions));
+  std::cout << "merkle root: " << merkle << std::endl;
 
   /*** Check if chain is valid ***/
   

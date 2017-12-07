@@ -42,7 +42,7 @@ Block::Block(std::string str)
   {
     prevHash = strings.at(0);
     merkleRoot = strings.at(1);
-    nonce = strings.at(1);
+    nonce = strings.at(2);
   }
 }
 
@@ -90,6 +90,7 @@ std::string Block::toString()
 std::string Block::mine() const
 {
   // brute force nonces so hash begins with zero/block is valid
+  // all possible 4 byte combinations (8 bits, hence pow(2, 8))
   for(int i = 0; i < pow(2, 8); i++)
   {
     Block temp(this->getPrevHash(), this->getMerkleRoot(), std::to_string(i)); 

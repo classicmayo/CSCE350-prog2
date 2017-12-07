@@ -1,5 +1,6 @@
 CC=g++
-CFLAGS= -Wall -Wextra -pedantic -Wfloat-equal -Wshadow -Wconversion -Wunreachable-code -std=c++11
+# CFLAGS= -Wall -Wextra -pedantic -Wfloat-equal -Wshadow -Wconversion -Wunreachable-code -std=c++11
+CFLAGS= -std=c++11
 
 Glaeser_Noemi_BTC: Block.o Transaction.o Blockchain.o Glaeser_Noemi_BTC.o
 	$(CC) $^ $(CFLAGS) -o '$@'

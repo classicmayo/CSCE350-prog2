@@ -25,7 +25,7 @@ namespace utils
 
     inline std::string hexToString(std::string str){
         std::stringstream HexString;
-        for(int i=0;i<str.length();i++){
+        for(int i=0;i<str.length()-1;i++){
             char a = str.at(i++);
             char b = str.at(i);
             int x = hexCharToInt(a);
