@@ -15,7 +15,7 @@ Transaction::Transaction()
 {
   sender = "";
   recipient = "";
-  amount = 0.0;
+  amount = "0.0";
 }
 
 Transaction::Transaction(std::string str)
@@ -29,22 +29,22 @@ Transaction::Transaction(std::string str)
     word = str.substr(0, pos);
     strings.push_back(word);
 
-    pos = str.find(" ");
     str = str.substr(pos+1);
+    pos = str.find(" ");
   }
-  
+  strings.push_back(str); // don't forget about the double
+
   if(strings.size() != 3)
   {
     sender = "";
     recipient = "";
-    amount = 0.0;
+    amount = "0.0";
   }
   else
   {
     sender = strings.at(0);
     recipient = strings.at(1);
-    // TODO: make sure third argument is a double
-    amount = std::stod(strings.at(2));
+    amount = strings.at(2);
   }
 }
 
@@ -64,8 +64,8 @@ Transaction::~Transaction()
 /*** public methods ***/
 std::string Transaction::toString()
 {
-  // string may need spaces?
-  return sender + recipient + std::to_string(amount);
+  // string needs spaces
+  return sender + " " + recipient + " " +  amount;
 }
 
 std::string Transaction::getSender() const
@@ -78,7 +78,7 @@ std::string Transaction::getRecipient() const
   return recipient;
 }
 
-double Transaction::getAmount() const
+std::string Transaction::getAmount() const
 {
   return amount;
 }

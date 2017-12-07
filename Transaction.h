@@ -17,7 +17,7 @@ class Transaction
   private:
     std::string sender;
     std::string recipient;
-    double amount;
+    std::string amount;
 
   public:
     Transaction();
@@ -29,7 +29,7 @@ class Transaction
     std::string toString();
     std::string getSender() const;
     std::string getRecipient() const;
-    double getAmount() const;
+    std::string getAmount() const;
 };
 
 #endif

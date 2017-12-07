@@ -93,13 +93,13 @@ std::string Block::mine() const
   // all possible 4 byte combinations (8 bits, hence pow(2, 8))
   for(int i = 0; i < pow(2, 8); i++)
   {
-    Block temp(this->getPrevHash(), this->getMerkleRoot(), std::to_string(i)); 
+    std::ostringstream o;
+    o << std::setfill('0') << std::setw(8) << std::hex << i;
+    std::string testNonce(o.str());
+    Block temp(this->getPrevHash(), this->getMerkleRoot(), testNonce); 
     if(temp.isValid())
     {
-      // convert i to hex string and return
-      std::stringstream stream;
-      stream << std::hex << std::to_string(i);
-      return stream.str(); 
+      return testNonce; 
     }
   }
   std::cout << "No nonce found." << std::endl;
