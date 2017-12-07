@@ -1,4 +1,5 @@
 test*
 *.o
+*.gch
 *.swp
 *.pdf
