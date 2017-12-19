@@ -11,7 +11,7 @@
 #define BLOCKCHAIN_H
 
 #include "Block.h"
-#include "glaeser_common.h"
+#include "../cpp/glaeser_common.h"
 
 class Blockchain
 {

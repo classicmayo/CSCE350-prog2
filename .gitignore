@@ -1,7 +1,6 @@
-test*
-Glaeser_Noemi_BTC
-*.o
-*.gch
+# Gradle
+# ------
+.gradle
+build
+
 *.swp
-*.pdf
-*.out

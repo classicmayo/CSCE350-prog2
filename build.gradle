@@ -1,0 +1,16 @@
+apply plugin: 'cpp'
+
+model {
+    components {
+        Block(NativeLibrarySpec)
+        Blockchain(NativeLibrarySpec)
+        Transaction(NativeLibrarySpec)
+        btc(NativeExecutableSpec) {
+            sources {
+               cpp.lib library: "Block"
+               cpp.lib library: "Blockchain"
+               cpp.lib library: "Transaction"
+            }
+        }
+    }
+}

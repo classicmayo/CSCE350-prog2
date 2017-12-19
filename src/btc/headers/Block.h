@@ -9,9 +9,9 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#include "glaeser_common.h"
-#include "picosha2.h"
-#include "utils.h"
+#include "../cpp/glaeser_common.h"
+#include "../cpp/picosha2.h"
+#include "../cpp/utils.h"
 
 class Block
 {

@@ -9,7 +9,7 @@
  * Date: 3-Dec-2017
  ***************************************************************************/
 
-#include "Glaeser_Noemi_BTC.h"
+#include "btc.h"
 
 // function prototype
 std::string merkleRoot(std::vector<Transaction> &);
@@ -24,7 +24,7 @@ int main(int argc, char ** argv)
 
   if(argc != 3)
   {
-    std::cout << "Usage: Glaeser_Noemi_BTC [blockchain.txt] [transaction.txt]" << std::endl;
+    std::cout << "Usage: btc [blockchain.txt] [transaction.txt]" << std::endl;
     exit(1);
   }
 
