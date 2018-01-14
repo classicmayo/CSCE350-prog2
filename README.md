@@ -3,7 +3,7 @@ Noemi Glaeser
 
 Assignment Synopsis adapted from Dr. Gabriel Terejanu
 
-# Bitcoin Simulation Programming Assignment
+# Blockchain Simulation Programming Assignment
 
 Usage:
 ```
